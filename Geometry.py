@@ -280,6 +280,9 @@ class Segment:
         x = (self.p1.x + ratio * self.p2.x) / (1 + ratio)
         y = (self.p1.y + ratio * self.p2.y) / (1 + ratio)
         return Point(x, y)
+    
+    def length(self):
+        return dist(self.p1, self.p2)
 
 
 class Polygon:
