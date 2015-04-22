@@ -68,6 +68,8 @@ def medls(event):
         canv.draw(medLineA)
         canv.draw(medLineC)
         canv.draw(medLineB)
+
+def adds(event):        
         canv.draw(MbXa)
         canv.draw(McXb)
         canv.draw(MaXc)
@@ -86,10 +88,10 @@ def biss(event):
         canv.draw(BIb)
         canv.draw(CIc)
 
-GeoMath.EPS = 10 ** -5
+GeoMath.EPS = 10 ** -3
 
 root = Tk()
-canv = Canvas(root, width = 750, height = 750, bg = 'white')
+canv = Canvas(root, width = 1500, height = 750, bg = 'white')
 
 all_points = []
 all_segments = []
@@ -217,7 +219,15 @@ all_points.extend([(Ya, "Ya"), (Yb, "Yb"), (Yc, 'Yc')])
 
 
 for point in all_points:
-        canv.create_text(point[0].x, point[0].y, text=point[1], fill='red', font=font)
+        if 'M' in point[1]:
+            fill = 'blue'
+        elif 'I' in point[1]:
+            fill = 'green'
+        elif 'X' in point[1] or 'Y' in point[1]:
+            fill = 'orange'
+        else:
+            fill = 'red'
+        canv.create_text(point[0].x, point[0].y, text=point[1], fill=fill, font=font)
 
 AM = Segment(A, M)
 BM = Segment(B, M)
@@ -246,6 +256,10 @@ button3 = Button(root, text = 'Bisectors')
 button3.bind('<Button-1>', biss)
 button3.pack()
 
+button4 = Button(root, text = 'Additional lines')
+button4.bind('<Button-1>', adds)
+button4.pack()
+
 for i in range(len(all_segments)):
     for j in range(i + 1, len(all_segments)):
         if GeoMath.eq(all_segments[i][0].length(), all_segments[j][0].length()):
@@ -254,5 +268,6 @@ for i in range(len(all_segments)):
 print('Press Medians button to show medians')
 print('Press Medium lines button to show medium lines')
 print('Press Bisectors button to show bisectors')
+print('Press Additional lines button to show other lines')
 
 root.mainloop()
