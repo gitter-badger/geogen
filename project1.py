@@ -38,6 +38,7 @@ def medls(event):
         canv.draw(medLineC)
         canv.draw(medLineB)
 
+# main
 GeoMath.EPS = 10 ** -7
 
 root = Tk()
